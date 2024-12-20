@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>tpplab3</name>
-    <description>Java веб-додаток для ресторану</description>
+    <description>Java </description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
