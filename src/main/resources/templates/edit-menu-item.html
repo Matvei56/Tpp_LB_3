@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Редагування Маршрутів</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Редагування Маршрутів</h1>
+
+      <form
+        th:action="@{/menu-items/update/{id}(id=${menuItem.menuItemId})}"
+        th:object="${menuItem}"
+        method="post"
+        class="form-container"
+      >
+        <input type="hidden" th:field="*{menuItemId}" />
+
+        <label for="name">Ім'я:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+        <div th:if="${#fields.hasErrors('name')}" class="error-message">
+          <p th:errors="*{name}">Помилка</p>
+        </div>
+
+        <label for="price">Вартість:</label>
+        <input type="text" id="price" th:field="*{price}" required />
+        <div th:if="${#fields.hasErrors('price')}" class="error-message">
+          <p th:errors="*{price}">Помилка</p>
+        </div>
+
+        <label for="category">Напрямок руху:</label>
+        <input type="text" id="category" th:field="*{category}" required />
+        <div th:if="${#fields.hasErrors('category')}" class="error-message">
+          <p th:errors="*{category}">Помилка</p>
+        </div>
+
+        <button type="submit" class="button">Зберегти</button>
+      </form>
+      <a href="/menu-items" class="button back">Повернутися</a>
+    </div>
+  </body>
+</html>

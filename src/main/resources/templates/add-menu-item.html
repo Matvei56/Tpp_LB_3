@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Додати маршрут</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Додати маршрут</h1>
+      <form
+        th:action="@{/menu-items/add}"
+        th:object="${menuItem}"
+        method="post"
+        class="form-container"
+      >
+        <label for="name">Назва перевізника:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+        <div
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"
+          class="error"
+        ></div>
+
+        <label for="price">Вартість:</label>
+        <input type="text" id="price" th:field="*{price}" required />
+        <div
+          th:if="${#fields.hasErrors('price')}"
+          th:errors="*{price}"
+          class="error"
+        ></div>
+
+        <label for="category">Маршури:</label>
+        <input type="text" id="category" th:field="*{category}" required />
+        <div
+          th:if="${#fields.hasErrors('category')}"
+          th:errors="*{category}"
+          class="error"
+        ></div>
+
+        <button type="submit" class="button">Зберегти</button>
+      </form>
+      <a href="/menu-items" class="button back">Повернутися</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Редагувати Інформацію</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Редагування інформації</h1>
+
+      <form
+        th:action="@{/passengers/update/{id}(id=${passenger.passengerId})}"
+        th:object="${passenger}"
+        method="post"
+        class="form-container"
+      >
+        <input type="hidden" th:field="*{passengerId}" />
+
+        <label for="name">Ім'я:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+        <div
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"
+          class="error"
+        ></div>
+
+        <label for="surname">Прізвище:</label>
+        <input type="text" id="surname" th:field="*{surname}" required />
+        <div
+          th:if="${#fields.hasErrors('surname')}"
+          th:errors="*{surname}"
+          class="error"
+        ></div>
+
+        <label for="phone">Телефон:</label>
+        <input type="text" id="phone" th:field="*{phone}" required />
+        <div
+          th:if="${#fields.hasErrors('phone')}"
+          th:errors="*{phone}"
+          class="error"
+        ></div>
+
+        <label for="email">Емейл:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+        <div
+          th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}"
+          class="error"
+        ></div>
+
+        <button type="submit" class="button">Зберегти</button>
+      </form>
+      <a href="/passengers" class="button back">Повернутися</a>
+    </div>
+  </body>
+</html>

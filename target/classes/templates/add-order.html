@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Додати Замовлення</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Додавання Замовлення</h1>
+      <form
+        th:action="@{/orders/add}"
+        th:object="${order}"
+        method="post"
+        class="form-container"
+      >
+        <!-- Відображення помилок для поля passenger -->
+        <div th:if="${#fields.hasErrors('passenger')}" class="error">
+          <span th:errors="*{passenger}">Помилка</span>
+        </div>
+        <label for="passenger">Пасажир:</label>
+        <select id="passenger" th:field="*{passenger.passengerId}" required>
+          <option value="" disabled selected>Вибір пасажира</option>
+          <option
+            th:each="passenger : ${passengers}"
+            th:value="${passenger.passengerId}"
+            th:text="${passenger.name + ' ' + passenger.surname + ' (ID: ' + passenger.passengerId + ')'}"
+          ></option>
+        </select>
+
+        <!-- Відображення помилок для поля orderDate -->
+        <div th:if="${#fields.hasErrors('orderDate')}" class="error">
+          <span th:errors="*{orderDate}">Помилка</span>
+        </div>
+        <label for="orderDate">Помилка:</label>
+        <input
+          type="date"
+          id="orderDate"
+          th:field="*{orderDate}"
+          required
+          max="[[${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}]]"
+        />
+
+        <button type="submit" class="button">Зберегти</button>
+      </form>
+      <a href="/orders" class="button back">Повернутися</a>
+    </div>
+  </body>
+</html>

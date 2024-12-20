@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Замовлення квитків</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Замовлення квитків</h1>
+      <a href="/orders/add" class="button">Додати</a>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Пасажири</th>
+            <th>Дата</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="order : ${orders}">
+            <td th:text="${order.orderId}"></td>
+            <td
+              th:text="${order.passenger.name + ' ' + order.passenger.surname +  ' (ID: ' + order.passenger.passengerId + ')'}"
+            ></td>
+            <td th:text="${order.orderDate}"></td>
+            <td>
+              <a
+                th:href="@{/orders/edit/{id}(id=${order.orderId})}"
+                class="button edit"
+                >Редагувати</a
+              >
+              <a
+                th:href="@{/orders/delete/{id}(id=${order.orderId})}"
+                class="button delete"
+                >ВИдалити</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="/home" class="button back">Повернутися</a>
+    </div>
+  </body>
+</html>
